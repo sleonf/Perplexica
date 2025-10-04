@@ -1,6 +1,6 @@
 [GENERAL]
 SIMILARITY_MEASURE = "cosine" # "cosine" or "dot"
-KEEP_ALIVE = "5m" # How long to keep Ollama models loaded into memory. (Instead of using -1 use "-1m")
+KEEP_ALIVE = "3m" # How long to keep Ollama models loaded into memory. (Instead of using -1 use "-1m")
 
 [MODELS.OPENAI]
 API_KEY = ""
@@ -20,7 +20,7 @@ API_URL = ""
 MODEL_NAME = ""
 
 [MODELS.OLLAMA]
-API_URL = "" # Ollama API URL - http://host.docker.internal:11434
+API_URL = "http://192.168.21:30068" # Ollama API URL - http://host.docker.internal:11434
 
 [MODELS.DEEPSEEK]
 API_KEY = ""
@@ -36,4 +36,4 @@ API_URL = "" # Lemonade API URL - http://host.docker.internal:8000
 API_KEY = "" # Optional API key for Lemonade
 
 [API_ENDPOINTS]
-SEARXNG = "" # SearxNG API URL - http://localhost:32768
+SEARXNG = "http://192.168.1.21:4000" # SearxNG API URL - http://localhost:32768
