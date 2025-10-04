@@ -20,7 +20,7 @@ API_URL = ""
 MODEL_NAME = ""
 
 [MODELS.OLLAMA]
-API_URL = "http://192.168.21:30068" # Ollama API URL - http://host.docker.internal:11434
+API_URL = "http://192.168.1.21:30068" # Ollama API URL - http://host.docker.internal:11434
 
 [MODELS.DEEPSEEK]
 API_KEY = ""
