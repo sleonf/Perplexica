@@ -1,6 +1,7 @@
 services:
   app:
-    #image: itzcrazykns1337/perplexica:mai
+    #image: itzcrazykns1337/perplexica:main
+    container_name: perplexica-app
     build:
       context: .
       dockerfile: app.dockerfile
