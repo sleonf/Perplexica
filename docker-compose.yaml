@@ -9,7 +9,7 @@ services:
       - SEARXNG_API_URL=http://192.168.1.21:4000
       - DATA_DIR=/home/perplexica
     ports:
-      - 3000:3000
+      - 3982:3000
     networks:
       - ix-open-webui_default
     volumes:
