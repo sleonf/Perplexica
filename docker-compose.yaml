@@ -11,7 +11,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - perplexica-network
+      - ix-open-webui_default
     volumes:
       - backend-dbstore:/home/perplexica/data
       - uploads:/home/perplexica/uploads
@@ -19,7 +19,8 @@ services:
     restart: unless-stopped
 
 networks:
-  perplexica-network:
+  ix-open-webui_default:
+    external: true
 
 volumes:
   backend-dbstore:
