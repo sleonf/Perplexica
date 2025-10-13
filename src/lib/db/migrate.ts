@@ -2,9 +2,12 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
 
-const db = new Database(path.join(process.cwd(), 'data', 'db.sqlite'));
+const DATA_DIR = process.env.DATA_DIR || process.cwd();
+const dbPath = path.join(DATA_DIR, './data/db.sqlite');
 
-const migrationsFolder = path.join(process.cwd(), 'drizzle');
+const db = new Database(dbPath);
+
+const migrationsFolder = path.join(DATA_DIR, 'drizzle');
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS ran_migrations (
@@ -54,7 +57,7 @@ fs.readdirSync(migrationsFolder)
                         id INTEGER PRIMARY KEY,
                         type TEXT NOT NULL,
                         chatId TEXT NOT NULL,
-                        createdAt TEXT NOT NULL,
+                        createdAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         messageId TEXT NOT NULL,
                         content TEXT,
                         sources TEXT DEFAULT '[]'
@@ -67,8 +70,10 @@ fs.readdirSync(migrationsFolder)
                 `);
 
         messages.forEach((msg: any) => {
-          if (msg.type === 'user') {
+          while (typeof msg.metadata === 'string') {
             msg.metadata = JSON.parse(msg.metadata || '{}');
+          }
+          if (msg.type === 'user') {
             insertMessage.run(
               'user',
               msg.chatId,
@@ -78,7 +83,6 @@ fs.readdirSync(migrationsFolder)
               '[]',
             );
           } else if (msg.type === 'assistant') {
-            msg.metadata = JSON.parse(msg.metadata || '{}');
             insertMessage.run(
               'assistant',
               msg.chatId,
